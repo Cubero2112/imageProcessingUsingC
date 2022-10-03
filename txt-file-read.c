@@ -21,7 +21,7 @@ int main()
 
     char line[500];
 
-    int pixelData[15];
+    int pixelData[5];
     int pos = 0;
 
     while (fgets(line, sizeof(line), file)) {
@@ -43,8 +43,6 @@ int main()
         pos = 0;
 
         printf("RED: %d \nGREEN: %d \nBLUE: %d \nHEIGHT: %d | WIDTH: %d\n", pixelData[0],pixelData[1],pixelData[2],pixelData[3],pixelData[4]);
-        printf("RED: %d \nGREEN: %d \nBLUE: %d \nHEIGHT: %d | WIDTH: %d\n", pixelData[5],pixelData[6],pixelData[7],pixelData[8],pixelData[9]);
-        printf("RED: %d \nGREEN: %d \nBLUE: %d \nHEIGHT: %d | WIDTH: %d\n", pixelData[10],pixelData[11],pixelData[12],pixelData[13],pixelData[14]);
         printf("------------------------------------------------------ \n");
     }
     fclose(file);
