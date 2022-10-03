@@ -3,6 +3,8 @@
 #include <png.h>
 #include <string.h>
 
+// gcc main.c -lpng -o main
+
 int width, height;
 png_byte color_type;
 png_byte bit_depth;
@@ -79,7 +81,7 @@ void read_png_file(char *filename) {
      }
 
   if(color_type == PNG_COLOR_TYPE_GRAY ||
-    color_type == PNG_COLOR_TYPE_GRAY_ALPHA)
+     color_type == PNG_COLOR_TYPE_GRAY_ALPHA)
     png_set_gray_to_rgb(png);
 
   png_read_update_info(png, info);
@@ -154,7 +156,7 @@ void write_png_file(char *filename) {
         png_bytep row = row_pointers_wr[y];
         for(int x = 0; x < width; x++) {
             png_bytep px = &(row[x * 4]);
-            // ---- Aca va el codigo que manipula los pixeles tomados desde el txt ------
+
             if (y < 10 || y > borde || (y < 40 && y > 30)){
                 px[0] = 0;
                 px[1] = 0;
@@ -165,8 +167,7 @@ void write_png_file(char *filename) {
                 px[1] = 255;
                 px[2] = 255;                  
             }
-            px[3] = 255;
-            // ---- Aca va el codigo que manipula los pixeles tomados desde el txt ------
+            px[3] = 255;     
        }
     }
 
@@ -252,15 +253,20 @@ void process_png_file() {
 }
 
 int main(int argc, char *argv[]) {
-  if(argc != 3) abort();
+  if(argc != 2) abort();
 
   char outFileName[50];
+  //char * token = strtok(argv[1], ".");
+  //char * nameFile = token[0];
+  printf("Antes read\n");
+  read_png_file(argv[1]);
+  printf("Despues read\n");
+
   strcpy(outFileName,argv[1]);
   strcat(outFileName, "Out.png");
 
-  read_png_file(argv[1]);
-
   //process_png_file();
+
 
   write_png_file(outFileName);
 
