@@ -49,7 +49,7 @@ int main(){
     while(1){
         printf("Press enter to continue\n");
         getchar();
-        sem_wait(semDeco);
+        sem_wait(semDeco); //Decrease the available resources 'cause one of them will be taken.
 
         index = sharedMemory->lastRead; 
         printf("Index = %d\n", index);
@@ -59,6 +59,6 @@ int main(){
         printf("Lei en la posicion %d el caracter %d\n",index, sharedMemory->items[index].pixel);
         sharedMemory->items[index].busy = 0; 
         sharedMemory->lastRead = index + 1; 
-        sem_post(semEnco);
+        sem_post(semEnco); //Increase the available resources 'cause the used in this process was release'
     }
 }
